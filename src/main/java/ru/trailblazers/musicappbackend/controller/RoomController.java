@@ -15,7 +15,7 @@ import java.util.UUID;
 public class RoomController implements RoomApi {
 
     private final RoomService service;
-    
+
     @Override
     public RoomResponse createRoom(RoomRequest request) {
         return null;
