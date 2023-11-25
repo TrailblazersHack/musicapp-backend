@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.trailblazers.musicappbackend.entity.enums.Status;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -30,4 +31,6 @@ public abstract class AbstractEntity {
 
     @UpdateTimestamp
     private Timestamp updatedAt;
+
+    private Status status;
 }
