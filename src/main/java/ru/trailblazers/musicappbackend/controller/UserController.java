@@ -1,7 +1,6 @@
 package ru.trailblazers.musicappbackend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trailblazers.musicappbackend.api.UserApi;
@@ -18,29 +17,29 @@ public class UserController implements UserApi {
 
     private final UserService service;
 
-    @Override
-    @PostMapping()
-    public UserResponse createUser(UserRequest request) {
-        return null;
-    }
+//    @Override
+//    @PostMapping()
+//    public UserResponse createUser(UserRequest request) {
+//        return service.addNewUser(request);
+//    }
 
     @Override
     public UserResponse getUserById(UUID userId) {
-        return null;
+        return service.getUserById(userId);
     }
 
     @Override
-    public List<UserResponse> getStudents() {
-        return null;
+    public List<UserResponse> getUsers() {
+        return service.getUsers();
     }
 
     @Override
     public UserResponse updateUser(UUID userId, UserRequest request) {
-        return null;
+        return service.updateUserById(userId, request);
     }
 
     @Override
     public void deleteUserById(UUID userId) {
-
+        service.deleteUserById(userId);
     }
 }

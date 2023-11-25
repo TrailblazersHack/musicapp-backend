@@ -3,6 +3,11 @@ package ru.trailblazers.musicappbackend.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.UserResponse;
 import ru.trailblazers.musicappbackend.entity.User;
@@ -23,15 +28,15 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final UserMapper mapper;
 
-    @Override
-    @Transactional
-    public UserResponse addNewUser(UserRequest request) {
-        User user = mapper.toEntity(request);
-        user.setId(UUID.randomUUID());
-        user.setStatus(Status.CONFIRMED);
-        repository.save(user);
-        return mapper.toDto(user);
-    }
+//    @Override
+//    @Transactional
+//    public UserResponse addNewUser(UserRequest request) {
+//        User user = mapper.toEntity(request);
+//        user.setId(UUID.randomUUID());
+//        user.setStatus(Status.CONFIRMED);
+//        repository.save(user);
+//        return mapper.toDto(user);
+//    }
 
     @Override
     public UserResponse updateUserById(UUID userId, UserRequest request) {
@@ -59,6 +64,17 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> getUsers() {
         List<User> users = repository.findAll();
         return mapper.toDtoList(users);
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) {
+                return (UserDetails) repository.findByEmail(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            }
+        };
     }
 
     private User getByIdOrThrow(UUID userId) {

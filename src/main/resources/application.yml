@@ -4,9 +4,14 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/musicapp-db
+    url: jdbc:postgresql://localhost:5432/musicapp_db
     username: postgres
-    password: dreges228
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
+springdoc:
+  swagger-ui:
+
+jwt:
+  secret: 123123

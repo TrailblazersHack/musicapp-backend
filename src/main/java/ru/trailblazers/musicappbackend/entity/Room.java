@@ -3,6 +3,7 @@ package ru.trailblazers.musicappbackend.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,10 @@ import java.util.UUID;
 @Data
 public class Room extends AbstractEntity {
     private String title;
-    private Integer limitUsers;
-    private Boolean privacy;
+
+    @OneToOne
+    private User host;
+
     @OneToMany
     private List<User> users;
 }

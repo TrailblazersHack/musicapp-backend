@@ -1,6 +1,7 @@
 package ru.trailblazers.musicappbackend.util.mapper;
 
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 import ru.trailblazers.musicappbackend.dto.request.RoomRequest;
 import ru.trailblazers.musicappbackend.dto.response.RoomResponse;
 import ru.trailblazers.musicappbackend.entity.Room;
