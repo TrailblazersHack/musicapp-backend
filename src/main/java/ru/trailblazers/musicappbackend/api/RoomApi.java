@@ -1,11 +1,12 @@
 package ru.trailblazers.musicappbackend.api;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.trailblazers.musicappbackend.dto.request.CreateRoomRequest;
 import ru.trailblazers.musicappbackend.dto.request.RoomRequest;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.RoomResponse;
@@ -14,45 +15,45 @@ import ru.trailblazers.musicappbackend.dto.response.UserResponse;
 import java.util.List;
 import java.util.UUID;
 
-@Api(tags = "Rooms | Комнаты", value = "Комната")
+@Tag(name = "Rooms | Комнаты", description = "Комната")
 @RequestMapping("/rooms")
 public interface RoomApi {
 
-    @ApiOperation(value = "Создание комнаты", nickname = "create-room", response = RoomResponse.class)
+    @Operation(summary = "Создание комнаты", operationId = "create-room")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Комната создана", response = UUID.class),
-            @ApiResponse(code = 400, message = "Ошибка валидации")})
+            @ApiResponse(responseCode = "200", description = "Комната создана"),
+            @ApiResponse(responseCode = "400", description = "Ошибка валидации")})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    RoomResponse createRoom(@RequestBody RoomRequest request);
+    RoomResponse createRoom(@RequestBody CreateRoomRequest request);
 
-    @ApiOperation(value = "Получение комнаты по ID", nickname = "get-room-by-id", response = RoomResponse.class)
+    @Operation(summary = "Получение комнаты по ID", operationId = "get-room-by-id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Комната получена", response = UUID.class),
-            @ApiResponse(code = 400, message = "Комната не найдена")})
+            @ApiResponse(responseCode = "200", description = "Комната получена"),
+            @ApiResponse(responseCode = "400", description = "Комната не найдена")})
     @GetMapping("/{roomId}")
     @ResponseStatus(HttpStatus.OK)
     RoomResponse getRoomById(@PathVariable UUID roomId);
 
-    @ApiOperation(value = "Получение списка комнат", nickname = "get-all-rooms", response = List.class)
+    @Operation(summary = "Получение списка комнат", operationId = "get-all-rooms")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Список комнат получен")})
+            @ApiResponse(responseCode = "200", description = "Список комнат получен")})
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     List<RoomResponse> getRooms();
 
-    @ApiOperation(value = "Обновление комнаты", nickname = "update-room", response = RoomResponse.class)
+    @Operation(summary = "Обновление комнаты", operationId = "update-room")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Комната обновлена"),
-            @ApiResponse(code = 400, message = "Ошибка валидации")})
+            @ApiResponse(responseCode = "200", description = "Комната обновлена"),
+            @ApiResponse(responseCode = "400", description = "Ошибка валидации")})
     @PutMapping("/{roomId}")
     @ResponseStatus(HttpStatus.OK)
     RoomResponse updateRoom(@PathVariable UUID roomId, RoomRequest request);
 
-    @ApiOperation(value = "Удаление комнаты", nickname = "delete-room", response = Void.class)
+    @Operation(summary = "Удаление комнаты", operationId = "delete-room")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Комната удалена"),
-            @ApiResponse(code = 400, message = "Комната не найдена")})
+            @ApiResponse(responseCode = "200", description = "Комната удалена"),
+            @ApiResponse(responseCode = "400", description = "Комната не найдена")})
     @DeleteMapping("/{roomId}")
     @ResponseStatus(HttpStatus.OK)
     void deleteRoomById(@PathVariable UUID roomId);

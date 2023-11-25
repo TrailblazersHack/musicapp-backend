@@ -1,6 +1,7 @@
 package ru.trailblazers.musicappbackend.util.mapper;
 
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.UserResponse;
 import ru.trailblazers.musicappbackend.entity.User;
