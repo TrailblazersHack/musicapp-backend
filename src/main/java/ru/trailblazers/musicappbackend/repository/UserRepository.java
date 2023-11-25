@@ -7,5 +7,5 @@ import ru.trailblazers.musicappbackend.entity.User;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<UUID, User> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 }
