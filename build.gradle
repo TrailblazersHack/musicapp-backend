@@ -11,6 +11,11 @@ java {
     sourceCompatibility = '17'
 }
 
+ext {
+    swagger2Version = '2.9.2'
+    swagger2ModelsAndAnnotationsVersion = '1.5.21'
+}
+
 repositories {
     mavenCentral()
 }
@@ -23,6 +28,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.8'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
+    implementation "io.springfox:springfox-swagger-ui:${swagger2Version}"
+    implementation ("io.springfox:springfox-swagger2:${swagger2Version}") {
+        exclude group: 'io.swagger', module: 'swagger-annotations'
+        exclude group: 'io.swagger', module: 'swagger-models'
+    }
+    implementation "io.swagger:swagger-annotations:${swagger2ModelsAndAnnotationsVersion}"
+    implementation "io.swagger:swagger-models:${swagger2ModelsAndAnnotationsVersion}"
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
