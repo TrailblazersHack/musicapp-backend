@@ -11,3 +11,13 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: dreges228
       POSTGRES_DB: musicapp-db
+  security-db:
+    container_name: security-db
+    image: postgres:latest
+    restart: on-failure
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dreges228
+      POSTGRES_DB: security-db

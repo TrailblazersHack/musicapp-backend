@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.trailblazers.musicappbackend.api.RoomApi;
 import ru.trailblazers.musicappbackend.dto.request.CreateRoomRequest;
 import ru.trailblazers.musicappbackend.dto.request.RoomRequest;
-import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.RoomResponse;
 import ru.trailblazers.musicappbackend.service.RoomService;
 
@@ -41,5 +40,15 @@ public class RoomController implements RoomApi {
     @Override
     public void deleteRoomById(UUID roomId) {
         service.deleteRoomById(roomId);
+    }
+
+    @Override
+    public RoomResponse addUserToRoom(UUID roomId, UUID userId) {
+        return service.addUserToRoom(roomId, userId);
+    }
+
+    @Override
+    public RoomResponse removeUserFromRoom(UUID roomId, UUID userId) {
+        return service.removeUserFromRoom(roomId, userId);
     }
 }

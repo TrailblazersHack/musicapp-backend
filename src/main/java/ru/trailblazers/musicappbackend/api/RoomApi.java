@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.trailblazers.musicappbackend.dto.request.CreateRoomRequest;
 import ru.trailblazers.musicappbackend.dto.request.RoomRequest;
-import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.RoomResponse;
-import ru.trailblazers.musicappbackend.dto.response.UserResponse;
 
 import java.util.List;
 import java.util.UUID;
@@ -57,4 +55,20 @@ public interface RoomApi {
     @DeleteMapping("/{roomId}")
     @ResponseStatus(HttpStatus.OK)
     void deleteRoomById(@PathVariable UUID roomId);
+
+    @Operation(summary = "Добавление пользователя в комнату", operationId = "add-user-to-room")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь добавлен в комнату"),
+            @ApiResponse(responseCode = "400", description = "Ошибка валидации.")})
+    @PutMapping("/{roomId}/addUser")
+    @ResponseStatus(HttpStatus.OK)
+    RoomResponse addUserToRoom(@PathVariable UUID roomId, UUID userId);
+
+    @Operation(summary = "Удаление пользователя из комнаты", operationId = "remove-user-from-room")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь удалён из комнаты"),
+            @ApiResponse(responseCode = "400", description = "Ошибка валидации.")})
+    @PutMapping("/{roomId}/removeUser")
+    @ResponseStatus(HttpStatus.OK)
+    RoomResponse removeUserFromRoom(@PathVariable UUID roomId, UUID userId);
 }

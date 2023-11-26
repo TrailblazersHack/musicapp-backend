@@ -1,6 +1,5 @@
 package ru.trailblazers.musicappbackend.service.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
@@ -24,11 +23,13 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
 
     @Override
-    @Transactional
     public UserResponse addNewUser(UserRequest request) {
         User user = mapper.toEntity(request);
+        System.out.println(user.getUsername());
         user.setId(UUID.randomUUID());
         user.setStatus(Status.CONFIRMED);
+        user.setUsername(request.getUsername());
+        user.setAge(request.getAge());
         repository.save(user);
         return mapper.toDto(user);
     }
