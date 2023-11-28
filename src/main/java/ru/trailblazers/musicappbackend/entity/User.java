@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import ru.trailblazers.musicappbackend.entity.enums.Role;
+import ru.trailblazers.musicappbackend.entity.enums.Status;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,6 +23,11 @@ public class User extends AbstractEntity {
     private String username;
     private Integer age;
     private String hashPassword;
+    private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
 
     @OneToOne
     private Room room;

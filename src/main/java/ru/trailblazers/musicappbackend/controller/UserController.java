@@ -1,6 +1,10 @@
 package ru.trailblazers.musicappbackend.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trailblazers.musicappbackend.api.UserApi;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
@@ -10,6 +14,7 @@ import ru.trailblazers.musicappbackend.service.UserService;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class UserController implements UserApi {
@@ -17,7 +22,7 @@ public class UserController implements UserApi {
     private final UserService service;
 
     @Override
-    public UserResponse createUser(UserRequest request) {
+    public UserResponse createUser(@Valid @RequestBody UserRequest request) {
         return service.addNewUser(request);
     }
 

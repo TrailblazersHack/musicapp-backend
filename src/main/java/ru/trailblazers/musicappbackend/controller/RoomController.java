@@ -3,7 +3,6 @@ package ru.trailblazers.musicappbackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import ru.trailblazers.musicappbackend.api.RoomApi;
-import ru.trailblazers.musicappbackend.dto.request.CreateRoomRequest;
 import ru.trailblazers.musicappbackend.dto.request.RoomRequest;
 import ru.trailblazers.musicappbackend.dto.response.RoomResponse;
 import ru.trailblazers.musicappbackend.service.RoomService;
@@ -18,7 +17,7 @@ public class RoomController implements RoomApi {
     private final RoomService service;
 
     @Override
-    public RoomResponse createRoom(CreateRoomRequest roomRequest) {
+    public RoomResponse createRoom(RoomRequest roomRequest) {
         return service.addNewRoom(roomRequest);
     }
 

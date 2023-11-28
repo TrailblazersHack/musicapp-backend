@@ -1,6 +1,7 @@
 package ru.trailblazers.musicappbackend.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.trailblazers.musicappbackend.dto.request.TrackRequest;
 import ru.trailblazers.musicappbackend.dto.response.TrackResponse;
@@ -36,5 +37,11 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public List<TrackResponse> getTracks() {
         return null;
+    }
+
+    @Override
+    @Scheduled
+    public void loadTracksToDataBase() {
+
     }
 }

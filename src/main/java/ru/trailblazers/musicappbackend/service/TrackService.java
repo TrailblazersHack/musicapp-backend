@@ -12,4 +12,6 @@ public interface TrackService {
     TrackResponse getTrackById(UUID trackId);
     void deleteTrackById(UUID trackId);
     List<TrackResponse> getTracks();
+
+    void loadTracksToDataBase();
 }

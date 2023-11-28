@@ -3,7 +3,6 @@ package ru.trailblazers.musicappbackend.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.trailblazers.musicappbackend.dto.request.CreateRoomRequest;
 import ru.trailblazers.musicappbackend.dto.request.RoomRequest;
 import ru.trailblazers.musicappbackend.dto.response.RoomResponse;
 import ru.trailblazers.musicappbackend.entity.User;
@@ -28,7 +27,7 @@ public class RoomServiceImpl implements RoomService {
     private final RoomMapper mapper;
 
     @Override
-    public RoomResponse addNewRoom(CreateRoomRequest request) {
+    public RoomResponse addNewRoom(RoomRequest request) {
         User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new UserNotFoundException(request.getUserId()));
         Room room = Room.builder()
                 .id(UUID.randomUUID())

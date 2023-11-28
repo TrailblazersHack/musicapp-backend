@@ -5,7 +5,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.UserResponse;
@@ -14,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Tag(name = "Users | Пользователи", description = "Пользователь")
+@Validated
 @RequestMapping("/users")
 public interface UserApi {
     @Operation(summary = "Создание пользователя", operationId = "create-user")
@@ -22,7 +26,7 @@ public interface UserApi {
             @ApiResponse(responseCode = "400", description = "Ошибка валидации")})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    UserResponse createUser(@RequestBody UserRequest request);
+    UserResponse createUser(@Valid @RequestBody UserRequest request);
 
     @Operation(summary = "Получение пользователя по ID", operationId = "get-user-by-id")
     @ApiResponses(value = {

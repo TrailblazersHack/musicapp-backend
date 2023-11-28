@@ -1,5 +1,6 @@
 package ru.trailblazers.musicappbackend.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.UserResponse;
 
@@ -12,4 +13,6 @@ public interface UserService {
     UserResponse getUserById(UUID userId);
     void deleteUserById(UUID userId);
     List<UserResponse> getUsers();
+
+    UserDetailsService userDetailsService();
 }

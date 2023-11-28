@@ -1,7 +1,9 @@
 package ru.trailblazers.musicappbackend.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import ru.trailblazers.musicappbackend.config.security.BaseUserDetailsService;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.response.UserResponse;
 import ru.trailblazers.musicappbackend.entity.User;
@@ -11,6 +13,7 @@ import ru.trailblazers.musicappbackend.repository.UserRepository;
 import ru.trailblazers.musicappbackend.service.UserService;
 import ru.trailblazers.musicappbackend.util.mapper.UserMapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,12 +27,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse addNewUser(UserRequest request) {
-        User user = mapper.toEntity(request);
-        System.out.println(user.getUsername());
-        user.setId(UUID.randomUUID());
-        user.setStatus(Status.CONFIRMED);
-        user.setUsername(request.getUsername());
-        user.setAge(request.getAge());
+        User user = User.builder()
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .id(UUID.randomUUID())
+                .status(Status.CONFIRMED)
+                .username(request.getUsername())
+                .age(request.getAge())
+                .build();
         repository.save(user);
         return mapper.toDto(user);
     }
@@ -60,6 +65,11 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> getUsers() {
         List<User> users = repository.findAll();
         return mapper.toDtoList(users);
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new BaseUserDetailsService(repository);
     }
 
     private User getByIdOrThrow(UUID userId) {
