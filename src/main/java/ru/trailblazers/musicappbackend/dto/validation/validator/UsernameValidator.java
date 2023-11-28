@@ -3,12 +3,9 @@ package ru.trailblazers.musicappbackend.dto.validation.validator;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.springframework.util.StringUtils;
 import ru.trailblazers.musicappbackend.dto.request.UserRequest;
 import ru.trailblazers.musicappbackend.dto.validation.constraint.UserConstraint;
 
-import java.util.Objects;
 
 import static java.util.Objects.isNull;
 import static org.springframework.util.StringUtils.hasText;
@@ -22,7 +19,7 @@ public class UsernameValidator implements ConstraintValidator<UserConstraint, Us
         boolean valid = true;
         if (isNull(request.getUsername()) || !hasText(request.getUsername())) {
             valid = false;
-            buildConstraintViolationWithTemplate(context, MESSAGE_USERNAME, request.getClass().getField("username").getName());
+            buildConstraintViolationWithTemplate(context, MESSAGE_USERNAME, "username");
         }
         return valid;
     }

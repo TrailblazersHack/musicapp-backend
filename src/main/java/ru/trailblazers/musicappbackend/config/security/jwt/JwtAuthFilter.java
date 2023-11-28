@@ -1,5 +1,6 @@
 package ru.trailblazers.musicappbackend.config.security.jwt;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,12 +19,14 @@ import ru.trailblazers.musicappbackend.service.JwtService;
 import ru.trailblazers.musicappbackend.service.UserService;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserService userService;
+
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
@@ -50,6 +53,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 SecurityContextHolder.setContext(context);
             }
         }
+
         filterChain.doFilter(request, response);
     }
 }

@@ -15,6 +15,7 @@ import ru.trailblazers.musicappbackend.repository.UserRepository;
 import ru.trailblazers.musicappbackend.service.RoomService;
 import ru.trailblazers.musicappbackend.util.mapper.RoomMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,7 +35,9 @@ public class RoomServiceImpl implements RoomService {
                 .title(request.getTitle())
                 .host(user)
                 .status(Status.CONFIRMED)
+                .users(new ArrayList<>())
                 .build();
+        room.getUsers().add(user);
         repository.save(room);
         return mapper.toDto(room);
     }

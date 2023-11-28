@@ -19,7 +19,7 @@ public class TrackValidator implements ConstraintValidator<TrackConstraint, Trac
         boolean valid = true;
         if (Objects.isNull(request.getTitle()) || !StringUtils.hasText(request.getTitle())) {
             valid = false;
-            buildConstraintViolationWithTemplate(context, MESSAGE_TITLE, request.getClass().getField("title").getName());
+            buildConstraintViolationWithTemplate(context, MESSAGE_TITLE, "title");
         }
         return valid;
     }

@@ -1,9 +1,6 @@
 package ru.trailblazers.musicappbackend.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.List;

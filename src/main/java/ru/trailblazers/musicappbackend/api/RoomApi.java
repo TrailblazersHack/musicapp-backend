@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.trailblazers.musicappbackend.dto.request.RoomRequest;
@@ -22,7 +23,7 @@ public interface RoomApi {
             @ApiResponse(responseCode = "400", description = "Ошибка валидации")})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    RoomResponse createRoom(@RequestBody RoomRequest request);
+    RoomResponse createRoom(@Valid @RequestBody RoomRequest request);
 
     @Operation(summary = "Получение комнаты по ID", operationId = "get-room-by-id")
     @ApiResponses(value = {

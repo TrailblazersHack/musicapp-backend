@@ -23,11 +23,11 @@ public class SignInValidator implements ConstraintValidator<SignInConstraint, Si
         boolean valid = true;
         if (isNull(request.getUsername()) || !hasText(request.getUsername())) {
             valid = false;
-            buildConstraintViolationWithTemplate(context, MESSAGE_USERNAME, request.getClass().getField("username").getName());
+            buildConstraintViolationWithTemplate(context, MESSAGE_USERNAME, "username");
         }
         if (isNull(request.getPassword()) || !hasText(request.getPassword())) {
             valid = false;
-            buildConstraintViolationWithTemplate(context, MESSAGE_PASSWORD, request.getClass().getField("password").getName());
+            buildConstraintViolationWithTemplate(context, MESSAGE_PASSWORD, "password");
         }
         return valid;
     }

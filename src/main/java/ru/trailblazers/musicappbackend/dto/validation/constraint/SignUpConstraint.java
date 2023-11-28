@@ -3,7 +3,6 @@ package ru.trailblazers.musicappbackend.dto.validation.constraint;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import ru.trailblazers.musicappbackend.dto.validation.validator.SignUpValidator;
-import ru.trailblazers.musicappbackend.dto.validation.validator.UsernameValidator;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

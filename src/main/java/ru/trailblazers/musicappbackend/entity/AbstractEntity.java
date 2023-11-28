@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.CurrentTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.cglib.core.Local;
@@ -26,8 +27,10 @@ public abstract class AbstractEntity {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @CurrentTimestamp
     private LocalDateTime createdAt;
 
+    @CurrentTimestamp
     private LocalDateTime updatedAt;
 
     @Enumerated(EnumType.STRING)
