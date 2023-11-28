@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/musicapp-db
+    username: postgres
+    password: dreges228
+  jpa:
+    hibernate:
+      ddl-auto: update
+jwt:
+  secret: 12f9df01Ad36dA4f42Ab86bA06c84a0c9ac912f9df01Ad36dA4f42Ab86bA06c84a0c9ac9
