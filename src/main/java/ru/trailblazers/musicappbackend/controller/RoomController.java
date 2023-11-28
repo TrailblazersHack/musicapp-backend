@@ -15,29 +15,39 @@ import java.util.UUID;
 public class RoomController implements RoomApi {
 
     private final RoomService service;
-    
+
     @Override
-    public RoomResponse createRoom(RoomRequest request) {
-        return null;
+    public RoomResponse createRoom(RoomRequest roomRequest) {
+        return service.addNewRoom(roomRequest);
     }
 
     @Override
     public RoomResponse getRoomById(UUID roomId) {
-        return null;
+        return service.getRoomById(roomId);
     }
 
     @Override
     public List<RoomResponse> getRooms() {
-        return null;
+        return service.getRooms();
     }
 
     @Override
     public RoomResponse updateRoom(UUID roomId, RoomRequest request) {
-        return null;
+        return service.updateRoomById(roomId, request);
     }
 
     @Override
     public void deleteRoomById(UUID roomId) {
+        service.deleteRoomById(roomId);
+    }
 
+    @Override
+    public RoomResponse addUserToRoom(UUID roomId, UUID userId) {
+        return service.addUserToRoom(roomId, userId);
+    }
+
+    @Override
+    public RoomResponse removeUserFromRoom(UUID roomId, UUID userId) {
+        return service.removeUserFromRoom(roomId, userId);
     }
 }

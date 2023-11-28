@@ -1,17 +1,19 @@
 package ru.trailblazers.musicappbackend.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.CurrentTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.cglib.core.Local;
+import ru.trailblazers.musicappbackend.entity.enums.Status;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -25,9 +27,12 @@ public abstract class AbstractEntity {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @CreationTimestamp
-    private Timestamp createdAt;
+    @CurrentTimestamp
+    private LocalDateTime createdAt;
 
-    @UpdateTimestamp
-    private Timestamp updatedAt;
+    @CurrentTimestamp
+    private LocalDateTime updatedAt;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }
